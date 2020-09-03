@@ -6,7 +6,7 @@ public class Soduku
 	
 	public Soduku()
 	{
-		board = new int [9][9];
+		board = new int [9][9]; // created a 2d array to represent the board
 
 		for (int i = 0; i < 9; i++)
 		{
@@ -50,14 +50,14 @@ public class Soduku
 
 	public boolean safe(int row, int col, int num)
 	{
-		return RowCheck(row, num)
+		return RowCheck(row, num) // method to check tow column and 3x3 box for duplicate numbers
 		&& ColumnCheck( col, num)
 		&& BoxCheck(row, col,  num);
 	}
 
 	private boolean RowCheck(int row, int num)
 	{
-		for(int i = 0; i < 9; i++){
+		for(int i = 0; i < 9; i++){ // checking for rows for duplicates
 			if(board[row][i] == num){
 				return false; 
 			}
@@ -67,7 +67,7 @@ public class Soduku
 
 	private boolean ColumnCheck(int col, int num)
 	{
-		for(int i = 0; i < 9; i++){
+		for(int i = 0; i < 9; i++){ // checking for columns for duplicates
 			if(board[i][col] == num){
 				return false;
 			}
@@ -77,8 +77,8 @@ public class Soduku
 
 	private boolean BoxCheck(int row, int col, int num)
 	{
-		int rowStart = (row/3)*3;
-		int rowEnd = rowStart + 2;
+		int rowStart = (row/3)*3; // checking the box for duplicates 
+		int rowEnd = rowStart + 2; // the maths here is to find which box group is the number being added are in
 
 		int colStart = (col/3)*3;
 		int colEnd = colStart+2;
@@ -95,7 +95,7 @@ public class Soduku
 
 	public boolean solve() 
 	{
-		for (int row = 0; row< 9; row++) 
+		for (int row = 0; row< 9; row++)  // a solver using the recursive backtracking method
 		{
 			for( int col = 0; col < 9; col++) 
 			{
@@ -122,7 +122,7 @@ public class Soduku
 
 	private void printBoard()
 	{
-		for (int row = 0; row <  9; row++) {
+		for (int row = 0; row <  9; row++) { // printing the board for display
 			for(int col = 0; col < 9; col++) {
 				System.out.print(board[row][col] + " ");
 			}
@@ -132,7 +132,7 @@ public class Soduku
 
 	private void boardComplete()
 	{
-		boolean complete = true;
+		boolean complete = true; // checking if there are any 0's left at the end and to print not completed
 
 		for (int row = 0; row <  9; row++) {
 			for(int col = 0; col < 9; col++) {
@@ -150,7 +150,7 @@ public class Soduku
 
 	public static void main (String[] args)
 	{
-		Soduku s = new Soduku();
+		Soduku s = new Soduku(); // created user interface to input numbers to solve any soduku puzzle
 		Scanner scanner = new Scanner(System.in);
 		Boolean userSafe = true;
 
@@ -164,7 +164,7 @@ public class Soduku
 				if(s.safe(i, c, num) && num != 0)
 				{
 					userSafe = false;
-					System.out.println("Error: You typed in a duplicate number");
+					System.out.println("Error: You typed in a duplicate number"); // error for any duplicated numbers typed in by the user
 				}
 				s.board[i][c] = num;
 			}
@@ -175,7 +175,7 @@ public class Soduku
 			System.out.println();
 			s.solve();
 			s.printBoard();
-			s.boardComplete();
+			s.boardComplete(); 
 		}
 	}
 }
