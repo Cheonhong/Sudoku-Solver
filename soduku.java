@@ -152,39 +152,33 @@ public class Soduku
 	{
 		Soduku s = new Soduku();
 		Scanner scanner = new Scanner(System.in);
+		Boolean userSafe = true;
 
 		for(int i = 0; i < 9; i++)
 		{
-			System.out.println("Enter numbers for row" + (i+ 1) + ":");
+			System.out.println("Enter numbers for row " + (i+ 1) + ":");
 			String string = scanner.nextLine();
-			String[] arr = string.split("");
-			int size = arr.length;
-
-			int [] numbers = new int [size];
-			for(int j = 0; j<size; j++)
-			{
-				numbers[j] = Integer.parseInt(arr[j]);
+			for(int c = 0; c < string.length(); c++){
+				char ch = string.charAt(c);
+				int num = Integer.parseInt(String.valueOf(ch));
+				if(s.safe(i, c, num) && num != 0)
+				{
+					userSafe = false;
+					System.out.println("Error: You typed in a duplicate number");
+				}
+				s.board[i][c] = num;
 			}
-			System.out.println(Arrays.toString(numbers));
-			// for(int c = 0; c < string.length(); c++)
-			// {
-			// 	int num = Character.getNumericValue(c);
-			// 	s.board[i][c] = num;
-			// }
 		}
 
+		if(userSafe) {
+			s.printBoard();
+			System.out.println();
+			s.solve();
+			s.printBoard();
+			s.boardComplete();
+		}
 	}
 }
-
-	// public static void main(String[] args){
-	// 	Sudoku s = new Sudoku();
-	// 	Scanner scanner = new Scanner(System.in);
-	// 	for(int i = 0; i < 9; i++){
-	// 		System.out.println(“Enter numbers for row” + (i+ 1) + “:”);
-	// 		String string = scanner.nextLine();
-	// 		for(int c = 0; c < string.length(); c++){
-	// 			Int num = Character.getNumericValue(c);
-	// 			s.board[i][c] = num;
 				
 		
 
