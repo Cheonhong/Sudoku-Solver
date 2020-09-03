@@ -1,5 +1,5 @@
 # Sudoku
 
 Group:
-Cheonhong (Jun) Lee
+Cheonhong (Jun) Lee, 
 Teresa Mei
